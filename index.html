@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+<head>
+   
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    
+    <title>JavaScript - CSS Parser</title>
+
+    <style>
+        @-ms-viewport{
+            width: device-width;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 40px 0 0;
+        }
+        .input {
+            display: table;
+            width: 100%;
+        }
+        .input .left {
+            display: block;
+            float: left;
+            width: 50%;
+            padding: 0 15px;
+        }
+        .input .right {
+            display: block;
+            float: left;
+            width: 50%;
+            padding: 0 15px;
+        }
+        textarea {
+            width: 100%;
+            max-width: 100%;
+            padding: 5px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: sans-serif;
+            text-transform: uppercase;
+        }
+        h1, h2, h3, h4 {
+            color: rgba(0,0,0,0.75);
+        }
+        h5, h6 {
+            color: rgba(0,0,0,0.65);
+        }
+        .view {
+            display: table;
+            width: 100%;
+            padding: 0 15px;
+        }
+        .view pre {
+            background: #323232;
+            color: #FFF;
+            padding: 15px;
+            font-size: small;
+            line-height: 1.55;
+            white-space: pre-wrap;
+        }
+        .label {
+            display: table;
+            padding: 0 15px;
+        }
+        .label h1 {
+            margin-bottom: 0;
+        }
+        .parse-button {
+            display: table;
+            padding: 15px;
+            width: 100%;
+        }
+        .parse-button .button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: #323232;
+            color: #fff;
+            line-height: 2.4;
+            cursor: pointer;
+            font-family: sans-serif;
+        }
+        .parse-button .button:hover {
+            background: #454545;
+        }
+        .help-bar {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 100%;
+            top: auto;
+            margin-bottom: -40px;
+            display: table;
+            height: 250px;
+            width: 100%;
+            padding: 15px;
+            padding-bottom: 55px;
+            font-family: sans-serif;
+            background: #272727;
+            text-align: center;
+            transition: all ease 0.85s;
+            box-shadow: rgba(0,0,0,0.75) 0 0 40px -5px;
+        }
+        .help-bar .info {
+            display: table-cell;
+            width: 100%;
+            vertical-align: middle;
+            color: #fff;
+        }
+        .help-bar.opened {
+            margin-bottom: -250px;
+        }
+        .help-bar .bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            display: block;
+            height: 40px;
+            line-height: 40px;
+            background: #64b746;
+            color: #fff;
+            cursor: pointer;
+        }
+        @media ( max-width: 799px ) {
+            .input .left,
+            .input .right {
+                width: 100%;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="help-bar">
+        <div class="info">
+            This tool will help you to seperate specific css rules. When you insert a css file and some rules, this program will search your css file for thos rules and seperate them with selectors. It not only seperates those rules, but also merges down selectors which use those rules. This tool is so much useful when you want to make your colors/fonts or any other things easily changeable.
+        </div>
+        <div class="bar">
+            WTF?
+        </div>
+    </div>
+    <div class="input">
+        <div class="left">
+            <h2>Paste your css code here:</h2>
+            <h5>Paste or write it directly :D</h5>
+            <textarea id="input" rows="20" placeholder="css file..."></textarea>
+        </div>
+        <div class="right">
+            <h2>Enter the css rules you want to split</h2>
+            <h5>use <i><strong>property : value;</strong></i> format. For example: "display: inline; color:#fff;".</h5>
+            <textarea id="targets" rows="20" placeholder="rules like: color: #fff; background: #000; font-size: 2.2rem;"></textarea>
+        </div>
+        <div class="parse-button">
+            <div class="button" id="parse">Parse my CSS!</div>
+        </div>
+    </div>
+    <div class="label">
+        <h1>Parsed output:</h1>
+    </div>
+    <div class="label">
+        <h4>Seperated:</h4>
+    </div>
+    <div class="view" id="seperated">
+    </div>
+    <div class="label">
+        <h4>Unseperated:</h4>
+    </div>
+    <div class="view" id="unseperated">
+    </div>
+    <script src="parse.js"></script>
+</body>
+</html>
